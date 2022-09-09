@@ -1,0 +1,64 @@
+{
+  "name": "cv",
+  "version": "0.0.1",
+  "description": "CV of Arthur Khineltsev project",
+  "scripts": {
+    "storybook": "start-storybook",
+    "start": "webpack-dev-server",
+    "build-dev": "webpack",
+    "build-prod": "NODE_ENV=production webpack",
+    "lint": "run-p \"lint:*\"",
+    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./",
+    "lint:types": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khinartur/cv.git"
+  },
+  "keywords": [
+    "cv"
+  ],
+  "author": "Arthur Khineltsev",
+  "license": "ISC",
+  "homepage": "https://khineltsev.dev",
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "core-js": "^3.22.7",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "@storybook/addon-knobs": "^6.4.0",
+    "@storybook/addon-viewport": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5.1.26",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.20.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2",
+    "storybook-addon-react-router-v6": "^0.1.11",
+    "style-loader": "^3.3.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-standard": "^26.0.0",
+    "terser-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.2",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  }
+}
