@@ -1,2 +1,2 @@
-# skills
-Compilation of cool frontend decisions
+# CV
+CV of Arthur Khineltsev | Senior frontend developer
