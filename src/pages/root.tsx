@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { Contacts, Experience, Hobbies, LinkedIn, Settings } from "~/components/application"
-import { Apps } from "~/components/apps"
+import { Contacts, Experience, Hobbies, LinkedIn, Settings } from "~/components/app"
+import { AppsGrid } from "~/components/apps-grid"
 import { Dock } from "~/components/dock"
 import { StatusBar } from "~/components/status-bar"
 
@@ -9,13 +9,7 @@ export function Root() {
   return (
     <Container>
       <StatusBar />
-      <Apps>
-        <Contacts />
-        <Hobbies />
-        <Settings />
-        <Experience />
-        <LinkedIn />
-      </Apps>
+      <AppsGrid applications={[Contacts, Hobbies, Settings, Experience, LinkedIn]} />
       <Dock>
         <Contacts />
         <Hobbies />
