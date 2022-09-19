@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Contacts, Experience, Hobbies, LinkedIn, Settings } from "~/components/app"
+import { Contacts, Experience, Hobbies, HRGame, LinkedIn, Settings } from "~/components/app"
 import { AppsGrid } from "~/components/apps-grid"
 import { Dock } from "~/components/dock"
 import { StatusBar } from "~/components/status-bar"
@@ -9,7 +9,7 @@ export function Root() {
   return (
     <Container>
       <StatusBar />
-      <AppsGrid applications={[Contacts, Hobbies, Settings, Experience, LinkedIn]} />
+      <AppsGrid applications={[Contacts, Hobbies, Settings, Experience, LinkedIn, HRGame]} />
       <Dock>
         <Contacts />
         <Hobbies />

@@ -7,4 +7,5 @@ export enum ApplicationsEnum {
   GITHUB = "github",
   FRONTMAN = "frontman",
   YOUTUBE = "youtube",
+  HRGAME = "hrgame",
 }

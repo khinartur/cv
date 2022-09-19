@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import styled from "styled-components"
 import { Text } from "~/components/text"
 import { ApplicationsEnum } from "./domain"
@@ -12,8 +12,15 @@ export type AppProps = {
 
 export function App({ app, name, showName }: AppProps) {
   const icon = iconByApplication[app]
+
+  const onClick = useCallback(() => {
+    // Change app state
+    // Add app in open apps
+    // Change active app
+  }, [])
+
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Icon src={icon} />
       {showName && name && <Text truncate mt={5} children={name} />}
     </Container>
@@ -25,6 +32,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 80px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const Icon = styled.div<{ src: string }>`
@@ -61,9 +72,14 @@ export function LinkedIn({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.LINKEDIN} name="LinkedIn" showName={showName} />
 }
 
+export function HRGame({ showName = false }: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.HRGAME} name="HR Game" showName={showName} />
+}
+
 export type ContreteApplication =
   | typeof Contacts
   | typeof Experience
   | typeof Settings
   | typeof Hobbies
   | typeof LinkedIn
+  | typeof HRGame
