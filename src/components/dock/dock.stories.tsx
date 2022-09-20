@@ -1,15 +1,15 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
 import { Dock } from "../dock"
-import { Contacts, Experience, Hobbies, Settings } from "../app"
+import { ContactsApp, ExperienceApp, HobbiesApp, SettingsApp } from "../app"
 
 const stories = storiesOf("Dock", module)
 
 stories.add("Basic", () => (
   <Dock>
-    <Contacts />
-    <Settings />
-    <Experience />
-    <Hobbies />
+    <ContactsApp />
+    <SettingsApp />
+    <ExperienceApp />
+    <HobbiesApp />
   </Dock>
 ))

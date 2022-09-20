@@ -1,6 +1,8 @@
 import React, { useCallback } from "react"
 import styled from "styled-components"
 import { Text } from "~/components/text"
+import { openApp } from "~/features/app"
+import { useAppDispatch } from "~/store/hooks"
 import { ApplicationsEnum } from "./domain"
 import { iconByApplication } from "./utils"
 
@@ -11,18 +13,19 @@ export type AppProps = {
 }
 
 export function App({ app, name, showName }: AppProps) {
+  const dispatch = useAppDispatch()
+
   const icon = iconByApplication[app]
 
+  // @todo: hooks deps typescript check
   const onClick = useCallback(() => {
-    // Change app state
-    // Add app in open apps
-    // Change active app
-  }, [])
+    dispatch(openApp(app))
+  }, [app])
 
   return (
     <Container onClick={onClick}>
       <Icon src={icon} />
-      {showName && name && <Text truncate mt={5} children={name} />}
+      {showName && name && <Text noUserSelect truncate mt={5} children={name} />}
     </Container>
   )
 }
@@ -52,34 +55,34 @@ const Icon = styled.div<{ src: string }>`
 
 export type ConcreteAppProps = Pick<AppProps, "showName">
 
-export function Contacts({ showName = false }: ConcreteAppProps) {
+export function ContactsApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.CONTACTS} name="Contacts" showName={showName} />
 }
 
-export function Experience({ showName = false }: ConcreteAppProps) {
+export function ExperienceApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.EXPERIENCE} name="Experience" showName={showName} />
 }
 
-export function Settings({ showName = false }: ConcreteAppProps) {
+export function SettingsApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.SETTIGNS} name="Settings" showName={showName} />
 }
 
-export function Hobbies({ showName = false }: ConcreteAppProps) {
+export function HobbiesApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.HOBBIES} name="Hobbies" showName={showName} />
 }
 
-export function LinkedIn({ showName = false }: ConcreteAppProps) {
+export function LinkedInApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.LINKEDIN} name="LinkedIn" showName={showName} />
 }
 
-export function HRGame({ showName = false }: ConcreteAppProps) {
+export function HRGameApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.HRGAME} name="HR Game" showName={showName} />
 }
 
-export type ContreteApplication =
-  | typeof Contacts
-  | typeof Experience
-  | typeof Settings
-  | typeof Hobbies
-  | typeof LinkedIn
-  | typeof HRGame
+export type ContreteAppType =
+  | typeof ContactsApp
+  | typeof ExperienceApp
+  | typeof SettingsApp
+  | typeof HobbiesApp
+  | typeof LinkedInApp
+  | typeof HRGameApp

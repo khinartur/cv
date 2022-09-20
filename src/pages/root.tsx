@@ -1,20 +1,24 @@
 import React from "react"
 import styled from "styled-components"
-import { Contacts, Experience, Hobbies, HRGame, LinkedIn, Settings } from "~/components/app"
+import { ContactsApp, ExperienceApp, HobbiesApp, HRGameApp, LinkedInApp, SettingsApp } from "~/components/app"
 import { AppsGrid } from "~/components/apps-grid"
 import { Dock } from "~/components/dock"
 import { StatusBar } from "~/components/status-bar"
+import { Scene } from "./scene"
 
 export function Root() {
   return (
     <Container>
       <StatusBar />
-      <AppsGrid applications={[Contacts, Hobbies, Settings, Experience, LinkedIn, HRGame]} />
+      <Screen>
+        <AppsGrid apps={[ContactsApp, HobbiesApp, SettingsApp, ExperienceApp, LinkedInApp, HRGameApp]} />
+        <Scene />
+      </Screen>
       <Dock>
-        <Contacts />
-        <Hobbies />
-        <Settings />
-        <Experience />
+        <ContactsApp />
+        <HobbiesApp />
+        <SettingsApp />
+        <ExperienceApp />
       </Dock>
     </Container>
   )
@@ -33,4 +37,10 @@ const Container = styled.div`
     #300021 97.15%,
     #300021 97.15%
   );
+`
+
+const Screen = styled.div`
+  position: relative;
+  height: 100%;
+  background: transparent;
 `

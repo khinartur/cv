@@ -1,18 +1,18 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
-import { Contacts } from "."
+import { ContactsApp } from "."
 import styled from "styled-components"
 
-const stories = storiesOf("Application", module)
+const stories = storiesOf("App", module)
 
 stories.add("Without app name", () => (
   <DarkWrapper>
-    <Contacts />
+    <ContactsApp />
   </DarkWrapper>
 ))
 stories.add("With app name", () => (
   <DarkWrapper>
-    <Contacts showName />
+    <ContactsApp showName />
   </DarkWrapper>
 ))
 

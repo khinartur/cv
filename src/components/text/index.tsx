@@ -4,28 +4,34 @@ import styled, { css } from "styled-components"
 export type TextProps = {
   children: string
   truncate?: boolean
+  noUserSelect?: boolean
   mt?: number
 }
 
-export function Text({ children, mt, truncate }: TextProps) {
-  return <Wrapper children={children} truncate={truncate} mt={mt} />
+export function Text({ children, mt, truncate, noUserSelect }: TextProps) {
+  return <Wrapper children={children} truncate={truncate} noUserSelect={noUserSelect} mt={mt} />
 }
 
-const Wrapper = styled.span<{ truncate?: boolean; mt?: number }>`
+const Wrapper = styled.span<{ truncate?: boolean; noUserSelect?: boolean; mt?: number }>`
   font-size: 12px;
   line-height: 14px;
   color: white;
-  ${props =>
-    props.mt &&
+  ${p =>
+    p.mt &&
     css`
-      margin-top: ${props.mt}px;
+      margin-top: ${p.mt}px;
     `}
-  ${props =>
-    props.truncate &&
+  ${p =>
+    p.truncate &&
     css`
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
       max-width: 100%;
+    `}
+  ${p =>
+    p.noUserSelect &&
+    css`
+      user-select: none;
     `}
 `

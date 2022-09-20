@@ -10,3 +10,5 @@ declare module '*.svg' {
   const image: string;
   export default image;
 }
+
+type Nullable<T> = T | null
