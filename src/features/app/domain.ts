@@ -10,7 +10,9 @@ export interface OpenedAppState {
   position: Position
 }
 
+export type AppsState = Record<Partial<ApplicationsEnum>, OpenedAppState>
+
 export interface AppState {
-  apps: OpenedAppState[]
+  apps: AppsState
   activeApp: Nullable<ApplicationsEnum>
 }

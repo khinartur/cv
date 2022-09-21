@@ -10,10 +10,8 @@ export function Root() {
   return (
     <Container>
       <StatusBar />
-      <Screen>
-        <AppsGrid apps={[ContactsApp, HobbiesApp, SettingsApp, ExperienceApp, LinkedInApp, HRGameApp]} />
-        <Scene />
-      </Screen>
+      <AppsGrid apps={[ContactsApp, HobbiesApp, SettingsApp, ExperienceApp, LinkedInApp, HRGameApp]} />
+      <Scene />
       <Dock>
         <ContactsApp />
         <HobbiesApp />
@@ -25,6 +23,7 @@ export function Root() {
 }
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -37,10 +36,4 @@ const Container = styled.div`
     #300021 97.15%,
     #300021 97.15%
   );
-`
-
-const Screen = styled.div`
-  position: relative;
-  height: 100%;
-  background: transparent;
 `

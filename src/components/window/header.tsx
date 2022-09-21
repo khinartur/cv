@@ -1,19 +1,30 @@
-import React from "react"
+import React, { useCallback } from "react"
 import styled from "styled-components"
+import { closeApp } from "~/features/app"
+import { useAppDispatch } from "~/store/hooks"
+import { ApplicationsEnum } from "../app/domain"
 
-export type HeaderProps = {}
+export type HeaderProps = {
+  application: ApplicationsEnum
+}
 
-export function Header({}: HeaderProps) {
+export const Header = React.forwardRef(({ application }: HeaderProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+  const dispatch = useAppDispatch()
+
+  const onClose = useCallback(() => {
+    dispatch(closeApp(application))
+  }, [dispatch])
+
   return (
-    <Container>
-      <Close />
+    <Container ref={ref}>
+      <Close onClick={onClose} />
       <Fold />
       <Fullscreen />
     </Container>
   )
-}
+})
 
-const Button = styled.div`
+const Button = styled.button`
   width: 12px;
   height: 12px;
   border-radius: 50%;

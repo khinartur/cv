@@ -7,7 +7,7 @@ export function Scene() {
   const apps = useAppSelector(state => state.app.apps)
   return (
     <Container>
-      {apps.map(app => (
+      {Object.values(apps).map(app => (
         <Window key={String(app)} appState={app} />
       ))}
     </Container>
@@ -16,10 +16,9 @@ export function Scene() {
 
 const Container = styled.div`
   position: absolute;
-  top: 0;
+  top: 24px;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: transparent;
+  height: calc(100% - 24px);
   pointer-events: none;
 `

@@ -16,10 +16,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-grow: 0;
+  align-items: center;
 
-  height: 44px;
-  padding: 14px 20px;
+  height: 24px;
+  padding: 0 16px;
   box-sizing: border-box;
 
-  color: white;
+  background: rgba(143, 143, 143, 0.2);
+  color: #fff;
 `
