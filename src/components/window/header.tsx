@@ -29,18 +29,18 @@ const Button = styled.button`
   height: 12px;
   border-radius: 50%;
   cursor: pointer;
+  padding: 0;
 `
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 16px;
   background-color: #fff;
-  height: 50px;
+  height: 30px;
   border-radius: 10px 10px 0 0;
   box-sizing: border-box;
-  cursor: move;
 
   & > ${Button} {
     margin-right: 8px;

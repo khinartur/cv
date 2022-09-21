@@ -3,13 +3,13 @@ import styled from "styled-components"
 
 export type ToggleProps = {
   enabled: boolean
-  onToggle: () => void
+  onChange: () => void
 }
 
-export function Toggle({ enabled, onToggle }: ToggleProps) {
+export function Toggle({ enabled, onChange }: ToggleProps) {
   return (
     <Wrapper>
-      <input type="checkbox" id="toggle" checked={enabled} onChange={onToggle} />
+      <input type="checkbox" id="toggle" checked={enabled} onChange={onChange} />
       <label htmlFor="toggle" />
     </Wrapper>
   )
@@ -23,8 +23,7 @@ const Wrapper = styled.div`
   }
   label {
     display: block;
-    background-color: #787880;
-    opacity: 0.32;
+    background-color: rgb(120, 120, 128, 0.32);
 
     width: 51px;
     height: 31px;

@@ -64,6 +64,8 @@ export function Window({ appState: { application, position } }: WindowProps) {
 }
 
 const Wrapper = styled.div<{ position: Position }>`
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: ${p => p.position.y}px;
   left: ${p => p.position.x}px;
@@ -71,6 +73,7 @@ const Wrapper = styled.div<{ position: Position }>`
   min-height: 300px;
   background-color: #000;
   border-radius: 10px;
+  overflow: hidden;
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.5), inset 0px 0.5px 1px #ffffff;
   filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0px 25px 30px rgba(0, 0, 0, 0.35));
   pointer-events: auto;

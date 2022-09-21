@@ -2,9 +2,10 @@ import React from "react"
 import { useAppSelector } from "~/store/hooks"
 import { Window } from "~/components/window"
 import styled from "styled-components"
+import { selectApps } from "~/features/app"
 
 export function Scene() {
-  const apps = useAppSelector(state => state.app.apps)
+  const apps = useAppSelector(selectApps)
   return (
     <Container>
       {Object.values(apps).map(app => (

@@ -1,12 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ApplicationsEnum } from "~/components/app/domain"
+import { AppTheme } from "~/core/domain"
 import { RootState } from "~/store"
+import { getInitialAppState, saveAppStateInStorage } from "~/store/utils"
 import { AppsState, AppState, OpenedAppState } from "./domain"
 
-const initialState: AppState = {
+const defaultState: AppState = {
   apps: {} as AppsState,
   activeApp: null,
+  theme: AppTheme.DARK,
 }
+
+const initialState: AppState = getInitialAppState(defaultState)
 
 export const appSlice = createSlice({
   name: "app",
@@ -28,25 +33,34 @@ export const appSlice = createSlice({
         },
       }
       state.activeApp = application
+      saveAppStateInStorage(state)
     },
     closeApp: (state, action: PayloadAction<ApplicationsEnum>) => {
       delete state.apps[action.payload]
+      saveAppStateInStorage(state)
     },
     setActiveApp: (state, action: PayloadAction<ApplicationsEnum>) => {
       state.activeApp = action.payload
+      saveAppStateInStorage(state)
     },
     updateAppPosition: (state, action: PayloadAction<OpenedAppState>) => {
       const app = state.apps[action.payload.application]
       if (app) {
         app.position = action.payload.position
+        saveAppStateInStorage(state)
       }
+    },
+    changeTheme: (state, action: PayloadAction<AppTheme>) => {
+      state.theme = action.payload
+      saveAppStateInStorage(state)
     },
   },
 })
 
-export const { openApp, closeApp, setActiveApp, updateAppPosition } = appSlice.actions
+export const { openApp, closeApp, setActiveApp, updateAppPosition, changeTheme } = appSlice.actions
 
 export const selectApps = (state: RootState) => state.app.apps
 export const selectActiveApp = (state: RootState) => state.app.activeApp
+export const selectAppTheme = (state: RootState) => state.app.theme
 
 export default appSlice.reducer
