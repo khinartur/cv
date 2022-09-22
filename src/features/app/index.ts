@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ApplicationsEnum } from "~/components/app/domain"
-import { AppTheme } from "~/core/domain"
 import { RootState } from "~/store"
 import { getInitialAppState, saveAppStateInStorage } from "~/store/utils"
+import { ThemeKey } from "~/theming/types"
 import { AppsState, AppState, OpenedAppState } from "./domain"
 
 const defaultState: AppState = {
   apps: {} as AppsState,
   activeApp: null,
-  theme: AppTheme.DARK,
+  theme: "dark",
 }
 
 const initialState: AppState = getInitialAppState(defaultState)
@@ -50,7 +50,7 @@ export const appSlice = createSlice({
         saveAppStateInStorage(state)
       }
     },
-    changeTheme: (state, action: PayloadAction<AppTheme>) => {
+    changeTheme: (state, action: PayloadAction<ThemeKey>) => {
       state.theme = action.payload
       saveAppStateInStorage(state)
     },

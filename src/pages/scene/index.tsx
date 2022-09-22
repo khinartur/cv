@@ -9,7 +9,7 @@ export function Scene() {
   return (
     <Container>
       {Object.values(apps).map(app => (
-        <Window key={String(app)} appState={app} />
+        <Window key={String(app.application)} appState={app} />
       ))}
     </Container>
   )

@@ -14,9 +14,12 @@ const Container = styled.div`
   flex-grow: 1;
   width: 400px;
   min-width: 320px;
-  height: 100%;
-  max-height: 1000px;
   background-color: #0d0a31;
+
+  @media (min-width: 768px) {
+    min-height: 600px;
+    max-height: 1000px;
+  }
 `
 
 const Title = styled(Text)`

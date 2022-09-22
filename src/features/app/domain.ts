@@ -1,5 +1,5 @@
 import { ApplicationsEnum } from "~/components/app/domain"
-import { AppTheme } from "~/core/domain"
+import { ThemeKey } from "~/theming/types"
 
 export type Position = {
   x: number
@@ -16,5 +16,5 @@ export type AppsState = Record<Partial<ApplicationsEnum>, OpenedAppState>
 export interface AppState {
   apps: AppsState
   activeApp: Nullable<ApplicationsEnum>
-  theme: AppTheme
+  theme: ThemeKey
 }

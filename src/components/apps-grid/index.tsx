@@ -11,8 +11,8 @@ export function AppsGrid({ apps }: AppsGridProps) {
   return (
     <Container>
       <Grid
-        children={apps.map(App => (
-          <App showName />
+        children={apps.map((App, idx) => (
+          <App key={idx} showName />
         ))}
       />
     </Container>

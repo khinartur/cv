@@ -4,7 +4,6 @@ import sunIcon from "~/assets/icons/sun.svg"
 import { Image } from "~/components/image"
 import { Text } from "~/components/text"
 import { Toggle } from "~/components/toggle"
-import { AppTheme } from "~/core/domain"
 import { changeTheme, selectAppTheme } from "~/features/app"
 import { useAppDispatch, useAppSelector } from "~/store/hooks"
 
@@ -13,7 +12,7 @@ export function Settings() {
   const theme = useAppSelector(selectAppTheme)
 
   const onToggle = useCallback(() => {
-    dispatch(changeTheme(theme === AppTheme.DARK ? AppTheme.LIGHT : AppTheme.DARK))
+    dispatch(changeTheme(theme === "dark" ? "light" : "dark"))
   }, [dispatch, theme])
 
   return (
@@ -23,7 +22,7 @@ export function Settings() {
         <Setting>
           <IconWrapper children={<Image src={sunIcon} />} />
           <Text children="Light theme" />
-          <Toggle enabled={theme === AppTheme.LIGHT} onChange={onToggle} />
+          <Toggle enabled={theme === "light"} onChange={onToggle} />
         </Setting>
       </List>
     </Container>

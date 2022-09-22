@@ -2,9 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Text } from "~/components/text"
 
-export type StatusBarProps = {}
-
-export function StatusBar() {
+export function MenuBar() {
   return (
     <Container>
       <Text children="CV | Arthur Khineltsev" />
@@ -22,6 +20,7 @@ const Container = styled.div`
   padding: 0 16px;
   box-sizing: border-box;
 
-  background: rgba(143, 143, 143, 0.2);
+  background: ${p => p.theme.colors.menubar};
+  backdrop-filter: blur(${p => (p.theme.key === "dark" ? "32.5px" : "75px")});
   color: #fff;
 `
