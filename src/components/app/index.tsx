@@ -1,6 +1,8 @@
 import React, { useCallback } from "react"
 import styled from "styled-components"
 import { Text } from "~/components/text"
+import { FRONTMAN_URL, GITHUB_URL, LINKEDIN_URL, YOUTUBE_URL } from "~/core/constants"
+import { pushHistory } from "~/core/utils/history"
 import { openApp } from "~/features/app"
 import { useAppDispatch } from "~/store/hooks"
 import { ApplicationsEnum } from "./domain"
@@ -10,17 +12,23 @@ export type AppProps = {
   app: ApplicationsEnum
   name: string
   showName?: boolean
+  redirectUrl?: string
 }
 
-export function App({ app, name, showName }: AppProps) {
+export function App({ app, name, showName, redirectUrl }: AppProps) {
   const dispatch = useAppDispatch()
 
   const icon = iconByApplication[app]
 
   // @todo: hooks deps typescript check
   const onClick = useCallback(() => {
+    if (redirectUrl) {
+      // @todo: open in new tab
+      pushHistory(redirectUrl)
+      return
+    }
     dispatch(openApp(app))
-  }, [app])
+  }, [app, redirectUrl])
 
   return (
     <Container onClick={onClick}>
@@ -71,12 +79,24 @@ export function HobbiesApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.HOBBIES} name="Hobbies" showName={showName} />
 }
 
-export function LinkedInApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.LINKEDIN} name="LinkedIn" showName={showName} />
-}
-
 export function HRGameApp({ showName = false }: ConcreteAppProps) {
   return <App app={ApplicationsEnum.HRGAME} name="HR Game" showName={showName} />
+}
+
+export function LinkedInApp({ showName = false }: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.LINKEDIN} name="LinkedIn" redirectUrl={LINKEDIN_URL} showName={showName} />
+}
+
+export function YoutubeApp({ showName = false }: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.YOUTUBE} name="My Channel" redirectUrl={YOUTUBE_URL} showName={showName} />
+}
+
+export function GitHubApp({ showName = false }: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.GITHUB} name="GitHub" redirectUrl={GITHUB_URL} showName={showName} />
+}
+
+export function FrontmanApp({ showName = false }: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.FRONTMAN} name="My Project" redirectUrl={FRONTMAN_URL} showName={showName} />
 }
 
 export type ContreteAppType =

@@ -9,6 +9,6 @@ export function getApplicationByName(app: ApplicationsEnum) {
     case ApplicationsEnum.HRGAME:
       return Rocket
     default:
-      return Settings
+      return null
   }
 }

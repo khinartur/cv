@@ -58,7 +58,7 @@ export function Window({ appState: { application, position } }: WindowProps) {
   return (
     <Wrapper ref={wrapperRef} position={position}>
       <Header ref={headerRef} application={application} />
-      <Application />
+      {Application && <Application />}
     </Wrapper>
   )
 }

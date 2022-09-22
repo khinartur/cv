@@ -29,5 +29,5 @@ const Container = styled.div`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: minmax(60px, 90px);
+  grid-template-rows: repeat(3, minmax(60px, 90px));
 `

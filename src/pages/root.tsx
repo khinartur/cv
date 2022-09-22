@@ -1,6 +1,16 @@
 import React from "react"
 import styled, { ThemeProvider } from "styled-components"
-import { ContactsApp, ExperienceApp, HobbiesApp, HRGameApp, LinkedInApp, SettingsApp } from "~/components/app"
+import {
+  ContactsApp,
+  ExperienceApp,
+  FrontmanApp,
+  GitHubApp,
+  HobbiesApp,
+  HRGameApp,
+  LinkedInApp,
+  SettingsApp,
+  YoutubeApp,
+} from "~/components/app"
 import { AppsGrid } from "~/components/apps-grid"
 import { Dock } from "~/components/dock"
 import { MenuBar } from "~/components/menu-bar"
@@ -16,7 +26,19 @@ export function Root() {
     <ThemeProvider theme={themeByKey[theme]}>
       <Container>
         <MenuBar />
-        <AppsGrid apps={[ContactsApp, HobbiesApp, SettingsApp, ExperienceApp, LinkedInApp, HRGameApp]} />
+        <AppsGrid
+          apps={[
+            ContactsApp,
+            HobbiesApp,
+            SettingsApp,
+            ExperienceApp,
+            LinkedInApp,
+            HRGameApp,
+            YoutubeApp,
+            FrontmanApp,
+            GitHubApp,
+          ]}
+        />
         <Scene />
         <Dock>
           <ContactsApp />
