@@ -1,20 +1,17 @@
 import React from "react"
 import styled from "styled-components"
-import { ContreteAppType } from "../app"
+import { FrontmanApp, GitHubApp, HobbiesApp, HRGameApp, SettingsApp } from "../app"
 
-// @todo: accept React nodes
-export type AppsGridProps = {
-  apps: ContreteAppType[]
-}
-
-export function AppsGrid({ apps }: AppsGridProps) {
+export function AppsGrid() {
   return (
     <Container>
-      <Grid
-        children={apps.map((App, idx) => (
-          <App key={idx} showName />
-        ))}
-      />
+      <Grid>
+        <HobbiesApp showName />
+        <GitHubApp showName />
+        <SettingsApp showName />
+        <HRGameApp showName />
+        <FrontmanApp showName />
+      </Grid>
     </Container>
   )
 }

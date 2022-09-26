@@ -6,7 +6,7 @@ import { pushHistory } from "~/core/utils/history"
 import { openApp } from "~/features/app"
 import { useAppDispatch } from "~/store/hooks"
 import { ApplicationsEnum } from "./domain"
-import { iconByApplication } from "./utils"
+import { iconByApplication, nameByApplication } from "./utils"
 
 export type AppProps = {
   app: ApplicationsEnum
@@ -64,39 +64,69 @@ const Icon = styled.div<{ src: string }>`
 export type ConcreteAppProps = Pick<AppProps, "showName">
 
 export function ContactsApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.CONTACTS} name="Contacts" showName={showName} />
+  return <App app={ApplicationsEnum.CONTACTS} name={nameByApplication[ApplicationsEnum.CONTACTS]} showName={showName} />
 }
 
 export function ExperienceApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.EXPERIENCE} name="Experience" showName={showName} />
+  return (
+    <App app={ApplicationsEnum.EXPERIENCE} name={nameByApplication[ApplicationsEnum.EXPERIENCE]} showName={showName} />
+  )
 }
 
 export function SettingsApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.SETTIGNS} name="Settings" showName={showName} />
+  return <App app={ApplicationsEnum.SETTIGNS} name={nameByApplication[ApplicationsEnum.SETTIGNS]} showName={showName} />
 }
 
 export function HobbiesApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.HOBBIES} name="Hobbies" showName={showName} />
+  return <App app={ApplicationsEnum.HOBBIES} name={nameByApplication[ApplicationsEnum.HOBBIES]} showName={showName} />
 }
 
 export function HRGameApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.HRGAME} name="HR Game" showName={showName} />
+  return <App app={ApplicationsEnum.HRGAME} name={nameByApplication[ApplicationsEnum.HRGAME]} showName={showName} />
 }
 
 export function LinkedInApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.LINKEDIN} name="LinkedIn" redirectUrl={LINKEDIN_URL} showName={showName} />
+  return (
+    <App
+      app={ApplicationsEnum.LINKEDIN}
+      name={nameByApplication[ApplicationsEnum.LINKEDIN]}
+      redirectUrl={LINKEDIN_URL}
+      showName={showName}
+    />
+  )
 }
 
 export function YoutubeApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.YOUTUBE} name="My Channel" redirectUrl={YOUTUBE_URL} showName={showName} />
+  return (
+    <App
+      app={ApplicationsEnum.YOUTUBE}
+      name={nameByApplication[ApplicationsEnum.YOUTUBE]}
+      redirectUrl={YOUTUBE_URL}
+      showName={showName}
+    />
+  )
 }
 
 export function GitHubApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.GITHUB} name="GitHub" redirectUrl={GITHUB_URL} showName={showName} />
+  return (
+    <App
+      app={ApplicationsEnum.GITHUB}
+      name={nameByApplication[ApplicationsEnum.GITHUB]}
+      redirectUrl={GITHUB_URL}
+      showName={showName}
+    />
+  )
 }
 
 export function FrontmanApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.FRONTMAN} name="My Project" redirectUrl={FRONTMAN_URL} showName={showName} />
+  return (
+    <App
+      app={ApplicationsEnum.FRONTMAN}
+      name={nameByApplication[ApplicationsEnum.FRONTMAN]}
+      redirectUrl={FRONTMAN_URL}
+      showName={showName}
+    />
+  )
 }
 
 export type ContreteAppType =

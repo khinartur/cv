@@ -10,5 +10,5 @@ const Story = () => {
   const [enabled, setEnabled] = useState(false)
   const onToggle = () => setEnabled(!enabled)
 
-  return <Toggle enabled={enabled} onToggle={onToggle} />
+  return <Toggle enabled={enabled} onChange={onToggle} />
 }

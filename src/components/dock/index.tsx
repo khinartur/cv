@@ -1,19 +1,49 @@
 import React from "react"
 import styled from "styled-components"
+import {
+  ContactsApp,
+  ExperienceApp,
+  FrontmanApp,
+  GitHubApp,
+  HobbiesApp,
+  HRGameApp,
+  LinkedInApp,
+  SettingsApp,
+  YoutubeApp,
+} from "../app"
 
 export type DockProps = {
-  children: React.ReactNode[]
+  mobile: boolean
 }
 
-export function Dock({ children }: DockProps) {
+export function Dock({ mobile }: DockProps) {
+  const apps = mobile
+    ? [<ContactsApp />, <LinkedInApp />, <YoutubeApp />, <ExperienceApp />]
+    : [
+        <HobbiesApp />,
+        <HRGameApp />,
+        <ContactsApp />,
+        <LinkedInApp />,
+        <YoutubeApp />,
+        <ExperienceApp />,
+        <FrontmanApp />,
+        <GitHubApp />,
+        <SettingsApp />,
+      ]
+
   return (
     <Container>
-      <Wrapper children={children} />
+      <Wrapper children={apps} />
     </Container>
   )
 }
 
 const Container = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
   @media (min-width: 768px) {
     display: flex;
     justify-content: center;

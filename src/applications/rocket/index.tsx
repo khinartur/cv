@@ -1,28 +1,36 @@
-import React from "react"
+import React, { useCallback, useState } from "react"
 import styled from "styled-components"
-import { Text } from "~/components/text"
+import { GameScene } from "./scene"
 
 export function Rocket() {
+  const [container, setContainer] = useState<HTMLDivElement | null>(null)
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
+  const setContainerRef = useCallback((node: HTMLDivElement) => setContainer(node), [setContainer])
+  const setCanvasRef = useCallback((node: HTMLCanvasElement) => setCanvas(node), [setCanvas])
+
   return (
-    <Container>
-      <Title children="HR Game" />
+    <Container ref={setContainerRef}>
+      <Canvas ref={setCanvasRef} />
+      {container && canvas && <GameScene container={container} canvas={canvas} />}
     </Container>
   )
 }
 
 const Container = styled.div`
+  position: relative;
+  display: flex;
   flex-grow: 1;
-  width: 400px;
   min-width: 320px;
-  background-color: #0d0a31;
+  max-width: 550px;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${p => p.theme.breakpoints.md}) {
+    width: 400px;
     min-height: 600px;
     max-height: 1000px;
   }
 `
-
-const Title = styled(Text)`
-  font-size: 24px;
-  color: #fff;
+const Canvas = styled.canvas`
+  flex-grow: 1;
+  width: 100%;
+  background-color: #0d0a31;
 `

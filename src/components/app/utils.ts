@@ -20,3 +20,15 @@ export const iconByApplication = {
   [ApplicationsEnum.FRONTMAN]: frontmanIcon,
   [ApplicationsEnum.HRGAME]: hrGameIcon,
 }
+
+export const nameByApplication = {
+  [ApplicationsEnum.CONTACTS]: "Contacts",
+  [ApplicationsEnum.EXPERIENCE]: "Work experience",
+  [ApplicationsEnum.HOBBIES]: "Hobbies",
+  [ApplicationsEnum.SETTIGNS]: "Settings",
+  [ApplicationsEnum.LINKEDIN]: "LinkedIn",
+  [ApplicationsEnum.GITHUB]: "GitHub",
+  [ApplicationsEnum.YOUTUBE]: "My channel",
+  [ApplicationsEnum.FRONTMAN]: "My project",
+  [ApplicationsEnum.HRGAME]: "HR Game",
+}

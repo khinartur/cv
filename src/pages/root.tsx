@@ -1,16 +1,6 @@
 import React from "react"
 import styled, { ThemeProvider } from "styled-components"
-import {
-  ContactsApp,
-  ExperienceApp,
-  FrontmanApp,
-  GitHubApp,
-  HobbiesApp,
-  HRGameApp,
-  LinkedInApp,
-  SettingsApp,
-  YoutubeApp,
-} from "~/components/app"
+import { useMediaQuery } from "~/core/hooks/use-media-query"
 import { AppsGrid } from "~/components/apps-grid"
 import { Dock } from "~/components/dock"
 import { MenuBar } from "~/components/menu-bar"
@@ -21,31 +11,15 @@ import { Scene } from "./scene"
 
 export function Root() {
   const theme = useAppSelector(selectAppTheme)
+  const isMobile = useMediaQuery(768)
 
   return (
     <ThemeProvider theme={themeByKey[theme]}>
       <Container>
-        <MenuBar />
-        <AppsGrid
-          apps={[
-            ContactsApp,
-            HobbiesApp,
-            SettingsApp,
-            ExperienceApp,
-            LinkedInApp,
-            HRGameApp,
-            YoutubeApp,
-            FrontmanApp,
-            GitHubApp,
-          ]}
-        />
+        <MenuBar mobile={isMobile} />
+        {isMobile && <AppsGrid />}
         <Scene />
-        <Dock>
-          <ContactsApp />
-          <HobbiesApp />
-          <SettingsApp />
-          <ExperienceApp />
-        </Dock>
+        <Dock mobile={isMobile} />
       </Container>
     </ThemeProvider>
   )

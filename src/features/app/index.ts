@@ -37,6 +37,8 @@ export const appSlice = createSlice({
     },
     closeApp: (state, action: PayloadAction<ApplicationsEnum>) => {
       delete state.apps[action.payload]
+      const remainingApps = Object.keys(state.apps) as ApplicationsEnum[]
+      state.activeApp = remainingApps.length === 0 ? null : remainingApps[0]
       saveAppStateInStorage(state)
     },
     setActiveApp: (state, action: PayloadAction<ApplicationsEnum>) => {
