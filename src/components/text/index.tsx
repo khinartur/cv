@@ -1,20 +1,32 @@
 import React from "react"
-import styled, { css } from "styled-components"
+import styled, { css, StyledComponent } from "styled-components"
+import { FontSize, FontWeight } from "~/theming/themes/common"
+import { AppTheme } from "~/theming/types"
 
 export type TextProps = {
   children: string
+  size?: FontSize
+  weight?: FontWeight
   truncate?: boolean
   noUserSelect?: boolean
   mt?: number
 }
 
-export function Text({ children, mt, truncate, noUserSelect }: TextProps) {
-  return <Wrapper children={children} truncate={truncate} noUserSelect={noUserSelect} mt={mt} />
+export function Text({ children, mt, size, weight, truncate, noUserSelect }: TextProps) {
+  return (
+    <Wrapper children={children} size={size} weight={weight} truncate={truncate} noUserSelect={noUserSelect} mt={mt} />
+  )
 }
 
-const Wrapper = styled.span<{ truncate?: boolean; noUserSelect?: boolean; mt?: number }>`
-  font-size: 12px;
-  line-height: 14px;
+const Wrapper = styled.span<{
+  size?: FontSize
+  weight?: FontWeight
+  truncate?: boolean
+  noUserSelect?: boolean
+  mt?: number
+}>`
+  ${p => (p.size ? p.theme.fontsStyles[p.size] : css``)};
+  ${p => (p.weight ? p.theme.fontsWeights[p.weight] : css``)};
   color: white;
   ${p =>
     p.mt &&
@@ -34,4 +46,4 @@ const Wrapper = styled.span<{ truncate?: boolean; noUserSelect?: boolean; mt?: n
     css`
       user-select: none;
     `}
-`
+` as StyledComponent<"span", AppTheme, TextProps>

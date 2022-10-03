@@ -20,15 +20,15 @@ export function Dock({ mobile }: DockProps) {
   const apps = mobile
     ? [<ContactsApp />, <LinkedInApp />, <YoutubeApp />, <ExperienceApp />]
     : [
-        <HobbiesApp />,
-        <HRGameApp />,
-        <ContactsApp />,
-        <LinkedInApp />,
-        <YoutubeApp />,
-        <ExperienceApp />,
-        <FrontmanApp />,
-        <GitHubApp />,
-        <SettingsApp />,
+        <HobbiesApp withTooltip />,
+        <HRGameApp withTooltip />,
+        <ContactsApp withTooltip />,
+        <LinkedInApp withTooltip />,
+        <YoutubeApp withTooltip />,
+        <ExperienceApp withTooltip />,
+        <FrontmanApp withTooltip />,
+        <GitHubApp withTooltip />,
+        <SettingsApp withTooltip />,
       ]
 
   return (

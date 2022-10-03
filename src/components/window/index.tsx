@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { getApplicationByName } from "~/applications/utils"
 import { debounce } from "~/core/utils/debounce"
-import { updateAppPosition } from "~/features/app"
+import { setActiveApp, updateAppPosition } from "~/features/app"
 import { OpenedAppState, Position } from "~/features/app/domain"
 import { useAppDispatch } from "~/store/hooks"
 import { Header } from "./header"
+import { Resizers } from "./resizers"
 
 export type WindowProps = {
   appState: OpenedAppState
@@ -14,6 +15,10 @@ export type WindowProps = {
 export function Window({ appState: { application, position } }: WindowProps) {
   const dispatch = useAppDispatch()
   const Application = getApplicationByName(application)
+
+  const onWrapperClick = useCallback(() => {
+    dispatch(setActiveApp(application))
+  }, [dispatch])
 
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const headerRef = useRef<HTMLDivElement | null>(null)
@@ -32,33 +37,48 @@ export function Window({ appState: { application, position } }: WindowProps) {
     [application],
   )
 
+  const onDrag = useCallback(
+    ({ movementX, movementY }: MouseEvent) => {
+      if (wrapperRef.current) {
+        const styles = window.getComputedStyle(wrapperRef.current)
+        const left = parseInt(styles.left) + movementX
+        const top = parseInt(styles.top) + movementY
+        wrapperRef.current.style.left = `${left}px`
+        wrapperRef.current.style.top = `${top}px`
+        updateWindowPosition(left, top)
+      }
+    },
+    [wrapperRef.current],
+  )
+
   useEffect(() => {
     const header = headerRef.current
     const wrapper = wrapperRef.current
     if (header && wrapper) {
-      const onDrag = ({ movementX, movementY }: MouseEvent) => {
-        const styles = window.getComputedStyle(wrapper)
-        const left = parseInt(styles.left)
-        const top = parseInt(styles.top)
-        wrapper.style.left = `${left + movementX}px`
-        wrapper.style.top = `${top + movementY}px`
-        updateWindowPosition(left, top)
-      }
-
-      header.addEventListener("mousedown", () => {
+      const onMouseDown = () => {
         header.addEventListener("mousemove", onDrag)
-      })
+      }
+      header.addEventListener("mousedown", onMouseDown)
 
-      document.addEventListener("mouseup", () => {
+      const onMouseUp = () => {
         header.removeEventListener("mousemove", onDrag)
-      })
+      }
+      document.addEventListener("mouseup", onMouseUp)
+
+      return () => {
+        header.removeEventListener("mousedown", onMouseDown)
+        document.removeEventListener("mouseup", onMouseUp)
+      }
     }
-  }, [headerRef.current, wrapperRef.current, updateWindowPosition])
+  }, [headerRef.current, wrapperRef.current, onDrag])
+
+  console.log("WINDOW POSITION", position)
 
   return (
-    <Wrapper ref={wrapperRef} position={position}>
+    <Wrapper ref={wrapperRef} position={position} onClick={onWrapperClick}>
       <Header ref={headerRef} application={application} />
       {Application && <Application />}
+      <Resizers containerRef={wrapperRef} updateWindowPosition={updateWindowPosition} />
     </Wrapper>
   )
 }

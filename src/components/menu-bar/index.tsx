@@ -6,6 +6,8 @@ import appleIcon from "~/assets/icons/apple.svg"
 import { useAppSelector } from "~/store/hooks"
 import { selectActiveApp } from "~/features/app"
 import { nameByApplication } from "../app/utils"
+import { FontWeight } from "~/theming/themes/common"
+import { Watch } from "./watch"
 
 export type MenuBarProps = {
   mobile: boolean
@@ -17,11 +19,13 @@ export function MenuBar({ mobile }: MenuBarProps) {
   return (
     <Container>
       <Left>
-        <Image src={appleIcon} />
-        {activeApp && <Text children={nameByApplication[activeApp]} />}
+        <MenuButton children={<Image src={appleIcon} />} />
+        {activeApp && (
+          <MenuButton children={<Text weight={FontWeight.BOLD} children={nameByApplication[activeApp]} />} />
+        )}
       </Left>
       <Right>
-        <Text children="CV | Arthur Khineltsev" />
+        <Watch />
       </Right>
     </Container>
   )
@@ -35,7 +39,7 @@ const Container = styled.div`
   justify-content: space-between;
 
   height: 24px;
-  padding: 0 16px 0 28px;
+  padding: 0 16px 0 8px;
   box-sizing: border-box;
 
   background: ${p => p.theme.colors.menubar};
@@ -51,4 +55,16 @@ const Left = styled.div`
 const Right = styled.div`
   display: flex;
   align-items: center;
+`
+
+const MenuButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0 8px;
+
+  &:active {
+  }
 `

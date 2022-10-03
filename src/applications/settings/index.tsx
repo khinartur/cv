@@ -6,7 +6,9 @@ import { Text } from "~/components/text"
 import { Toggle } from "~/components/toggle"
 import { changeTheme, selectAppTheme } from "~/features/app"
 import { useAppDispatch, useAppSelector } from "~/store/hooks"
+import { FontSize, FontWeight } from "~/theming/themes/common"
 
+// @todo: choose language, choose time + time format
 export function Settings() {
   const dispatch = useAppDispatch()
   const theme = useAppSelector(selectAppTheme)
@@ -17,11 +19,13 @@ export function Settings() {
 
   return (
     <Container>
-      <Title children="Settings" />
+      <Text size={FontSize.TITLE_APP} weight={FontWeight.BOLD} children="Settings" />
       <List>
         <Setting>
-          <IconWrapper children={<Image src={sunIcon} />} />
-          <Text children="Light theme" />
+          <SettingLeft>
+            <IconWrapper children={<Image src={sunIcon} />} />
+            <Text children="Light theme" />
+          </SettingLeft>
           <Toggle enabled={theme === "light"} onChange={onToggle} />
         </Setting>
       </List>
@@ -39,11 +43,6 @@ const Container = styled.div`
   background-color: #000;
 `
 
-const Title = styled(Text)`
-  font-size: 24px;
-  color: #fff;
-`
-
 const List = styled.div`
   display: flex;
   flex-grow: 1;
@@ -58,6 +57,12 @@ const Setting = styled.div`
   flex-direction: row;
   align-items: center;
   padding: 8px 12px;
+`
+
+const SettingLeft = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 `
 
 const IconWrapper = styled.div`

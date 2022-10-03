@@ -18,13 +18,35 @@ export enum FontSize {
   BODY = "body",
 }
 
-const fontWeights: Record<FontSize, number> = {
-  [FontSize.TITLE_APP]: 700,
-  [FontSize.BODY]: 400,
+export enum FontWeight {
+  LIGHT = "light",
+  REGULAR = "regular",
+  BOLD = "bold",
+  BLACK = "black",
+}
+
+const fontWeights: Record<FontWeight, number> = {
+  [FontWeight.LIGHT]: 300,
+  [FontWeight.REGULAR]: 400,
+  [FontWeight.BOLD]: 700,
+  [FontWeight.BLACK]: 900,
+}
+
+const fontsWeights = Object.values(FontWeight).reduce((acc, x) => {
+  return {
+    ...acc,
+    [x]: mapWeightToFontStyle(x),
+  }
+}, {} as Record<FontWeight, FlattenSimpleInterpolation>)
+
+function mapWeightToFontStyle(weight: FontWeight): FlattenSimpleInterpolation {
+  return css`
+    font-weight: ${fontWeights[weight]};
+  `
 }
 
 const fontSizes: Record<FontSize, number> = {
-  [FontSize.TITLE_APP]: 40,
+  [FontSize.TITLE_APP]: 32,
   [FontSize.BODY]: 24,
 }
 
@@ -44,7 +66,6 @@ function mapSizeToFontStyle(size: FontSize): FlattenSimpleInterpolation {
   return css`
     font-size: ${fontSizes[size]}px;
     line-height: ${lineHeight[size]}px;
-    font-weight: ${fontWeights[size]};
   `
 }
 
@@ -73,6 +94,7 @@ export const commonTheme: CommonTheme = {
   zIndexes,
   breakpoints,
   fontsStyles,
+  fontsWeights,
   transitions,
   uiSizes,
 }

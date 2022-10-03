@@ -3,8 +3,10 @@ import styled from "styled-components"
 import { Text } from "~/components/text"
 import { FRONTMAN_URL, GITHUB_URL, LINKEDIN_URL, YOUTUBE_URL } from "~/core/constants"
 import { pushHistory } from "~/core/utils/history"
+import { isHoverableDevice } from "~/core/utils/is-hoverable-device"
 import { openApp } from "~/features/app"
 import { useAppDispatch } from "~/store/hooks"
+import { Tooltip } from "../tooltip"
 import { ApplicationsEnum } from "./domain"
 import { iconByApplication, nameByApplication } from "./utils"
 
@@ -12,10 +14,11 @@ export type AppProps = {
   app: ApplicationsEnum
   name: string
   showName?: boolean
+  withTooltip?: boolean
   redirectUrl?: string
 }
 
-export function App({ app, name, showName, redirectUrl }: AppProps) {
+export function App({ app, name, showName = false, withTooltip = false, redirectUrl }: AppProps) {
   const dispatch = useAppDispatch()
 
   const icon = iconByApplication[app]
@@ -30,12 +33,18 @@ export function App({ app, name, showName, redirectUrl }: AppProps) {
     dispatch(openApp(app))
   }, [app, redirectUrl])
 
-  return (
+  const component = (
     <Container onClick={onClick}>
       <Icon src={icon} />
       {showName && name && <Text noUserSelect truncate mt={5} children={name} />}
     </Container>
   )
+
+  if (withTooltip && isHoverableDevice) {
+    return <Tooltip label={name} children={component} />
+  }
+
+  return component
 }
 
 const Container = styled.div`
@@ -61,70 +70,68 @@ const Icon = styled.div<{ src: string }>`
   background-position: center;
 `
 
-export type ConcreteAppProps = Pick<AppProps, "showName">
+export type ConcreteAppProps = Pick<AppProps, "showName" | "withTooltip">
 
-export function ContactsApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.CONTACTS} name={nameByApplication[ApplicationsEnum.CONTACTS]} showName={showName} />
+export function ContactsApp(props: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.CONTACTS} name={nameByApplication[ApplicationsEnum.CONTACTS]} {...props} />
 }
 
-export function ExperienceApp({ showName = false }: ConcreteAppProps) {
-  return (
-    <App app={ApplicationsEnum.EXPERIENCE} name={nameByApplication[ApplicationsEnum.EXPERIENCE]} showName={showName} />
-  )
+export function ExperienceApp(props: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.EXPERIENCE} name={nameByApplication[ApplicationsEnum.EXPERIENCE]} {...props} />
 }
 
-export function SettingsApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.SETTIGNS} name={nameByApplication[ApplicationsEnum.SETTIGNS]} showName={showName} />
+export function SettingsApp(props: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.SETTIGNS} name={nameByApplication[ApplicationsEnum.SETTIGNS]} {...props} />
 }
 
-export function HobbiesApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.HOBBIES} name={nameByApplication[ApplicationsEnum.HOBBIES]} showName={showName} />
+export function HobbiesApp(props: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.HOBBIES} name={nameByApplication[ApplicationsEnum.HOBBIES]} {...props} />
 }
 
-export function HRGameApp({ showName = false }: ConcreteAppProps) {
-  return <App app={ApplicationsEnum.HRGAME} name={nameByApplication[ApplicationsEnum.HRGAME]} showName={showName} />
+export function HRGameApp(props: ConcreteAppProps) {
+  return <App app={ApplicationsEnum.HRGAME} name={nameByApplication[ApplicationsEnum.HRGAME]} {...props} />
 }
 
-export function LinkedInApp({ showName = false }: ConcreteAppProps) {
+export function LinkedInApp(props: ConcreteAppProps) {
   return (
     <App
       app={ApplicationsEnum.LINKEDIN}
       name={nameByApplication[ApplicationsEnum.LINKEDIN]}
       redirectUrl={LINKEDIN_URL}
-      showName={showName}
+      {...props}
     />
   )
 }
 
-export function YoutubeApp({ showName = false }: ConcreteAppProps) {
+export function YoutubeApp(props: ConcreteAppProps) {
   return (
     <App
       app={ApplicationsEnum.YOUTUBE}
       name={nameByApplication[ApplicationsEnum.YOUTUBE]}
       redirectUrl={YOUTUBE_URL}
-      showName={showName}
+      {...props}
     />
   )
 }
 
-export function GitHubApp({ showName = false }: ConcreteAppProps) {
+export function GitHubApp(props: ConcreteAppProps) {
   return (
     <App
       app={ApplicationsEnum.GITHUB}
       name={nameByApplication[ApplicationsEnum.GITHUB]}
       redirectUrl={GITHUB_URL}
-      showName={showName}
+      {...props}
     />
   )
 }
 
-export function FrontmanApp({ showName = false }: ConcreteAppProps) {
+export function FrontmanApp(props: ConcreteAppProps) {
   return (
     <App
       app={ApplicationsEnum.FRONTMAN}
       name={nameByApplication[ApplicationsEnum.FRONTMAN]}
       redirectUrl={FRONTMAN_URL}
-      showName={showName}
+      {...props}
     />
   )
 }

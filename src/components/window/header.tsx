@@ -36,6 +36,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-shrink: 0;
   padding: 0 16px;
   background-color: #fff;
   height: 30px;
